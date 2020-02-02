@@ -1,1 +1,1 @@
-web: python manage.py
+web: gunicorn manage:bot_app --log-file -
