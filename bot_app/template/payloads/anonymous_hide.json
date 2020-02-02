@@ -1,0 +1,45 @@
+{
+  "trigger_id": "{}",
+  "view":{
+    "callback_id": "anonymous",
+    "type": "modal",
+    "title": {
+      "type": "plain_text",
+      "text": "Anonymous Post"
+    },
+    "blocks": [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "You can go to talk before posting, if you need help.\n Feel free to contact us!"
+        }
+      },
+      {
+        "block_id": "compliance_members",
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": ""
+        }
+      },
+      {
+        "block_id": "form_display",
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "If you still would like to post, push the *Show form*. "
+        },
+        "accessory": {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "Show form",
+            "emoji": true
+          },
+          "value": "show_form"
+        }
+      }
+    ]
+  }
+}

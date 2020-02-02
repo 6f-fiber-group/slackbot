@@ -1,0 +1,84 @@
+{
+  "trigger_id": "{}",
+  "view":{
+    "type": "modal",
+    "callback_id": "anonymous",
+    "title": {
+      "type": "plain_text",
+      "text": "Anonymous Post"
+    },
+    "submit": {
+      "type": "plain_text",
+      "text": "Submit",
+      "emoji": true
+    },
+    "blocks": [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "You can go to talk before posting, if you need help.\n Feel free to contact us!"
+        }
+      },
+      {
+        "type": "section",
+        "block_id": "compliance_members",
+        "text": {
+          "type": "mrkdwn",
+          "text": ""
+        }
+      },
+      {
+        "type": "section",
+        "block_id": "form_display",
+        "text": {
+          "type": "mrkdwn",
+          "text": " "
+        },
+        "accessory": {
+          "type": "button",
+          "text": {
+            "type": "plain_text",
+            "text": "Hide form",
+            "emoji": true
+          },
+          "value": "hide_form"
+        }
+      },
+      {
+        "type": "divider"
+      },
+      {
+        "block_id": "select_channel",
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "Select the channel you would like to post"
+        },
+        "accessory": {
+          "type": "static_select",
+          "placeholder": {
+            "type": "plain_text",
+            "text": "Channels",
+            "emoji": true
+          },
+          "options": []
+        }
+      },
+      {
+        "type": "input",
+        "block_id": "content_block",
+        "element": {
+          "action_id": "content_action",
+          "type": "plain_text_input",
+          "multiline": true
+        },
+        "label": {
+          "type": "plain_text",
+          "text": "Content",
+          "emoji": true
+        }
+      }
+    ]
+  }
+}

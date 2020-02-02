@@ -1,0 +1,27 @@
+{
+  "channel": "{}",
+  "attachments": [
+    {
+      "fallback": "Plain-text summary of the attachment.",
+      "callback_id": "anonymous_befeore_entering_msg",
+      "color": "#2eb886",
+      "title": "Annonymous Post",
+      "text": "Do you really need to post as annonymous?",
+      "actions": [
+        {
+          "type": "button",
+          "text": "Yes",
+          "name": "confirm_annonymous_befeore_entering_msg",
+          "style": "primary",
+          "value": "do_annoymous_post"
+        },
+        {
+          "type": "button",
+          "text": "No",
+          "name": "confirm_annonymous_befeore_entering_msg",
+          "value": "undo_annoymous_post"
+        }
+      ]
+    }
+  ]
+}
