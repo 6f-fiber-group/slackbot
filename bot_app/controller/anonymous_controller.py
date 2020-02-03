@@ -34,10 +34,6 @@ def slash_anonymous():
 
   return make_response("", 200)
 
-@bp.route("/", methods=["GET"])
-def slash_anonymous():
-  return "hello world"
-
 def anonymous_post(req):
   action_val = req["actions"][0]["value"]
 
