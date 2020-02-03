@@ -2,7 +2,7 @@ import os
 import json
 from slack import WebClient
 from flask import Blueprint, request, make_response
-import pprint
+
 from .anonymous_controller import\
   anonymous_post,\
   update_anonymous_post_info,\
@@ -16,7 +16,6 @@ slack_client = WebClient(token=os.getenv("SLACK_BOT_TOKEN"))
 @bp.route("/", methods=["POST"])
 def even_worker():
   req = json.loads(request.form["payload"])
-  pprint.pprint(req)
 
   if req["type"] == "interactive_message":
     if req["callback_id"] == "anonymous_befeore_entering_msg":

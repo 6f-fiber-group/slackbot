@@ -3,7 +3,7 @@ import json
 from urllib.parse import parse_qs
 from slack import WebClient
 from flask import Blueprint, request, make_response, current_app
-import pprint
+
 from ..utils import \
   get_user_joined_channels,\
   get_channel_name_by_id,\
@@ -38,7 +38,7 @@ def anonymous_post(req):
   action_val = req["actions"][0]["value"]
 
   if action_val == "do_annoymous_post":
-    with open("bot_app/template/payloads/anonymous_show.json", "r") as f:
+    with open("bot_app/template/payloads/anonymous_hide.json", "r") as f:
       res = json.load(f)
       res["trigger_id"] = res["trigger_id"].format(req["trigger_id"])
 
@@ -48,8 +48,6 @@ def anonymous_post(req):
       view=res["view"],
       trigger_id=res["trigger_id"]
     )
-
-    pprint.pprint(res.data)
 
   if action_val == "undo_annoymous_post":
     slack_client.chat_postMessage(
