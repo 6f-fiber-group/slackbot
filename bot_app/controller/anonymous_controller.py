@@ -9,6 +9,9 @@ from ..utils import \
   get_channel_name_by_id,\
   get_users_in_channel
 
+from .questionnaire_controller import\
+  ask_for_questionnaire
+
 bp = Blueprint('anonymous', __name__, url_prefix='/anonymous')
 
 slack_client = WebClient(token=os.getenv("SLACK_BOT_TOKEN"))
@@ -49,7 +52,7 @@ def anonymous_post(req):
       trigger_id=res["trigger_id"]
     )
 
-  if action_val == "undo_annoymous_post":
+  if action_val == "not_do_annoymous_post":
     slack_client.chat_postMessage(
       channel = req["user"]["id"],
       text = "Bye! :wave:"
@@ -86,20 +89,23 @@ def set_params_for_anonymous_post(res, user_id):
 
   return res
 
-def update_anonymous_post_info(channel_id=None, text=None, user_id=None, initialize=False):
-  if channel_id:
-    anonymous_post_info["channel_id"] = channel_id
-  if text:
-    anonymous_post_info["text"] = text
-  if user_id:
-    anonymous_post_info["user_id"] = user_id
-  if initialize:
+def update_anonymous_post_info(req):
+  if req["type"] == "view_submission":
+    anonymous_post_info["text"] = req["view"]["state"]["values"]["content_block"]["content_action"]["value"]
+    anonymous_post_info["user_id"] = req["user"]["id"]
+  
+  elif req["type"] == "block_actions":
+    anonymous_post_info["channel_id"] = req["actions"][0]["selected_option"]["value"]
+    anonymous_post_info["user_id"] = req["user"]["id"]
+
+  elif  req["type"] == "initialize":
     anonymous_post_info["channel_id"] = ""
     anonymous_post_info["text"] = ""
     anonymous_post_info["user_id"] = ""
+
   return make_response("update anonymous post info", 200)
 
-def submit_anonymous_post():
+def after_submit_anonymous_post(req):
   slack_client.chat_postMessage(
     channel = anonymous_post_info["channel_id"],
     text = anonymous_post_info["text"]
@@ -110,20 +116,25 @@ def submit_anonymous_post():
     channel = anonymous_post_info["user_id"],
     text = "Successfully posted to <#%s|%s>!"%(anonymous_post_info["channel_id"], channel_name)
   )
-  update_anonymous_post_info(initialize=True)
+
+  update_anonymous_post_info({"type": "initialize"})
+
+  ask_for_questionnaire(req)
 
   return make_response("", 200)
 
-def form_display(view_id, view_hash, user_id, display):
+def form_display(req):
+  user_id = req["user"]["id"]
+  display = req["actions"][0]["value"]
+
   file_name = "anonymous_show.json" if display == "show_form" else "anonymous_hide.json"
   with open("bot_app/template/payloads/%s"%file_name, "r") as f:
     res = json.load(f)
 
   res = set_params_for_anonymous_post(res, user_id)
-  pprint.pprint(res["view"])
   slack_client.views_update(
-    view_id = view_id,
-    hash = view_hash,
+    view_id = req["view"]["id"],
+    hash = req["view"]["hash"],
     view = res["view"]
   )
 

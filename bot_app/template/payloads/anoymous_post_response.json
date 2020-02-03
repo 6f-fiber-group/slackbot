@@ -1,0 +1,22 @@
+[{
+  "fallback": "Plain-text summary of the attachment.",
+  "callback_id": "anonymous_questionnaire",
+  "color": "#63ace5",
+  "title": "Questionnaire",
+  "text": "Could you answer a questionnaire to improve 6f fiber group environment?",
+  "actions": [
+    {
+      "type": "button",
+      "text": "Sure!",
+      "name": "confirm_annonymous_questionnaire",
+      "style": "primary",
+      "value": "do_questionnaire"
+    },
+    {
+      "type": "button",
+      "text": "Sorry...",
+      "name": "confirm_annonymous_questionnaire",
+      "value": "not_do_questionnaire"
+    }
+  ]
+}]

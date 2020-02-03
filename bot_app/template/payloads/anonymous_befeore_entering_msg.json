@@ -19,7 +19,7 @@
           "type": "button",
           "text": "No",
           "name": "confirm_annonymous_befeore_entering_msg",
-          "value": "undo_annoymous_post"
+          "value": "not_do_annoymous_post"
         }
       ]
     }
