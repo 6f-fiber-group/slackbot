@@ -2,7 +2,6 @@ import os
 from flask import Flask
 from bot_app.controller import anonymous_controller as anonymous
 from bot_app.controller import interacitve_controller as interactive
-from bot_app.controller import questionnaire_controller as questionnaire
 from . import config
 
 config_type = {
@@ -16,7 +15,6 @@ def create_app():
 
   app.register_blueprint(anonymous.bp)
   app.register_blueprint(interactive.bp)
-  app.register_blueprint(questionnaire.bp)
 
   return app
 
