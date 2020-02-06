@@ -1,5 +1,4 @@
 {
-  "trigger_id": "{}",
   "view":{
     "callback_id": "anonymous",
     "type": "modal",
