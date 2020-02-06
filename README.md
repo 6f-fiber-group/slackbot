@@ -1,0 +1,1 @@
+[Read](https://github.com/6f-fiber-group/slackbot/wiki/%E5%8C%BF%E5%90%8D%E6%8A%95%E7%A8%BF%E6%A9%9F%E8%83%BD%E3%81%AE%E4%BD%9C%E6%88%90) why this bot is necessary.
