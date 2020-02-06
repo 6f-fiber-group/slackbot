@@ -1,4 +1,9 @@
-def get_user_joined_channels(slack_client, user_id):
+import os
+from slack import WebClient
+
+slack_client = WebClient(token=os.getenv("SLACK_BOT_TOKEN"))
+
+def get_user_joined_channels(user_id):
   all_channels = slack_client.channels_list().data["channels"]
   return list(map(
     lambda y: {"id": y["id"], "name": "#"+y["name"]}, filter(
@@ -6,12 +11,12 @@ def get_user_joined_channels(slack_client, user_id):
     )
   ))
 
-def get_channel_name_by_id(slack_client, channel_id):
+def get_channel_name_by_id(channel_id):
   return slack_client.channels_info(
     channel = channel_id
   )["channel"]["name"]
 
-def get_users_in_channel(slack_client, channel_id):
+def get_users_in_channel(channel_id):
   users = slack_client.channels_info(
     channel = channel_id
   )["channel"]["members"]
